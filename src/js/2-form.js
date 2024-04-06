@@ -8,9 +8,14 @@ formEl.setAttribute('autocomplete', 'off');
 formEl.innerHTML =
   "<label>Email<input type='email' name='email' autofocus /></label><label>Message<textarea name='message' rows='8'></textarea></label><button type='submit'>Submit</button>";
 
+const storage = {
+  email: null,
+  message: null,
+};
+
 const onFormInput = event => {
-  storage.email = formEl.elements.email.value;
-  storage.message = formEl.elements.message.value;
+  storage.email = formEl.elements.email.value.trim();
+  storage.message = formEl.elements.message.value.trim();
 
   localStorage.setItem('feedback-form-state', JSON.stringify(storage));
 };
@@ -21,11 +26,6 @@ if (localStorage.length !== 0) {
   formEl.elements.email.value = savedUserData.email;
   formEl.elements.message.value = savedUserData.message;
 }
-
-const storage = {
-  email: null,
-  message: null,
-};
 
 formEl.addEventListener('input', onFormInput);
 
