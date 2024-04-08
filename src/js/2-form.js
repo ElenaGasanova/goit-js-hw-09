@@ -31,7 +31,15 @@ formEl.addEventListener('input', onFormInput);
 
 formEl.addEventListener('submit', event => {
   event.preventDefault();
-  localStorage.removeItem('feedback-form-state');
-  formEl.reset();
-  console.log(savedUserData);
+
+  if (
+    formEl.elements.email.value === '' ||
+    formEl.elements.message.value === ''
+  ) {
+    alert('Both fields must be filled');
+  } else {
+    localStorage.removeItem('feedback-form-state');
+    formEl.reset();
+    console.log(storage);
+  }
 });
